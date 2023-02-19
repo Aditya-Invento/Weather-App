@@ -125,10 +125,10 @@ async function fetch_weather(req,res) {
     });
     const current_w = await process_current_weather(res_weather?.data || res_weather);
     const daily_w = await process_daily_weather(res_weather?.data || res_weather);
-    const {address} = found_location?.data;
+    const {display_name} = found_location?.data;
     const res_data = {
       _ip:req.clientIp,
-      location:`${address?.town}, ${address?.state_district}, ${address?.state}, ${address?.postcode}, ${address?.country}`,
+      location:display_name,
       current:current_w,
       daily:daily_w,
       alerts:res_weather?.data?.alerts?.alert
