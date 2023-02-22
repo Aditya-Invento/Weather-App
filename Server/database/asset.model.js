@@ -1,17 +1,15 @@
 const {Schema,model} = require('mongoose');
 const shortid = require("shortid");
 const asset_schema = new Schema({
-  id: {
+  id: {//weather_code + time suffix: d=day/n=night
     type: String,
-    default: shortid.generate,
+    // default: shortid.generate,
     index: true
   },
-  time: {//POS VALS = morning / afternoon / night
-    typs:String,index: true
-  },
-  scene: {//POS VALS = clear_sky / clouds / rain / thunderstorm / snow / mist
-    typs:String,index: true
-  },
+  //POS VALS = day / night
+  time: String,
+  // POS VALS = rain / snow / sleet / clouds / thunder / mist / overcast / clear_sky
+  weather: String,
   imgs: {//BACKGROUND IMAGES
     type: Array,
     default: []

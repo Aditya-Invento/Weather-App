@@ -1,24 +1,19 @@
 const { default: axios } = require("axios");
 const {get_rd_data,set_rd_data} = require('../database/redis_conn');
+const assetsDB = require('../database/asset.model');
 const shortid = require("shortid");
+const weather_codes = require('../weather_codes');
 const rdkey_weather = 'weather_app | weather_data => ';//for caching weather data
-const rdkey_user = 'weather_app | user_data => ';//for caching user settings
 
 function process_icon(code) {
   try {
     if(typeof code !== 'number' || isNaN(code)) return false;
-    const rain_codes = [1072,1150,1153,1168,1171,1180,1183,1186,1189,1192,1195,1198,1201,1240,1243,1246];//16
-    const snow_codes = [1066,1114,1210,1213,1216,1219,1222,1225,1237];
-    const sleet_codes = [1069,1204,1207,1249,1252];
-    const cloud_codes = [1003,1006,1009];
-    const thunder_rain_codes = [1273,1276];
-    const thunder_snow_codes = [1279,1282];
-    if(rain_codes.includes(code)) return 1072;
-    if(snow_codes.includes(code)) return 1066;
-    if(sleet_codes.includes(code)) return 1069;
-    if(cloud_codes.includes(code)) return 1003;
-    if(thunder_rain_codes.includes(code)) return 1273;
-    if(thunder_snow_codes.includes(code)) return 1279;
+    if(weather_codes['rain'].includes(code)) return 1072;
+    if(weather_codes['snow'].includes(code)) return 1066;
+    if(weather_codes['sleet'].includes(code)) return 1069;
+    if(weather_codes['clouds'].includes(code)) return 1003;
+    if(weather_codes['thunder_rain'].includes(code)) return 1273;
+    if(weather_codes['thunder_snow'].includes(code)) return 1279;
     // remaining => 1087:'Thunder', 1030:'Mist', 1009:'Overcast', 1000:'Clear Sky'
     else return code;
   } catch(err) {
@@ -47,7 +42,7 @@ async function process_current_weather(data) {
         high:Math.round(maxtemp_c),low:Math.round(mintemp_c),
         feelslike:Math.round(feelslike_c)
       },
-      precip: {mm:Number(precip_mm.toFixed(2)),inch:Number(precip_in.toFixed(1))},
+      precip: {mm:Number(precip_mm.toFixed(2)),inch:Number(precip_in.toFixed(3))},
       wind: {kph:Number(wind_kph.toFixed(1)),mph:Number(wind_mph.toFixed(1))},
       uv:uv,is_day:Boolean(is_day),
       condition: {
@@ -79,13 +74,40 @@ async function process_daily_weather(data) {
     return Promise.reject(err);
   }
 }
-
+// Setting assets data
+(async ()=>{
+  try {
+    let i = weather_codes.common.length - 1;
+    while (i >= 0) {
+      const __weather = weather_codes.common[i];
+      const found_asset_day = await assetsDB.findOne({id:`${__weather.code}`+'d'});
+      const found_asset_night = await assetsDB.findOne({id:`${__weather.code}`+'n'});
+      if(!found_asset_day) {
+        const new_asset_day = new assetsDB({id: `${__weather.code}`+'d'});
+        new_asset_day.time = 'day';
+        new_asset_day.weather = __weather.type;
+        await new_asset_day.save();
+      }
+      if(!found_asset_night) {
+        const new_asset_night = new assetsDB({id: `${__weather.code}`+'n'});
+        new_asset_night.time = 'night';
+        new_asset_night.weather = __weather.type;
+        await new_asset_night.save();
+      }
+      i--;
+    }
+  } catch(err) {
+    throw err;
+  }
+})();
+// Fetching Weather Data
 async function fetch_weather(req,res) {
   try {
     // Getting Cache
     const get_cache_weather = await get_rd_data(rdkey_weather+req?.cookies?.weather_cache);
     if(get_cache_weather && !req.query.refresh) return res.json(get_cache_weather);
     // Getting Cache
+    
     const {by,val,country_code} = req.query;//val for lat_lon=<lat>,<lon>
     const can_q_by = {ip:1,lat_lon:1,city:1,zip:1};
     if(!can_q_by[by]) return res.status(503).json({err:true,message:'Invalid query params'});
@@ -143,5 +165,6 @@ async function fetch_weather(req,res) {
     return res.status(503).json({err:true,message:err.message});
   }
 }
+
 
 module.exports = {fetch_weather};
