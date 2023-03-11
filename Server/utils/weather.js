@@ -1,3 +1,8 @@
+function rand_lttr() {
+  const alphs = "abcd";
+  const rand_idx = Math.floor(Math.random() * alphs.length);
+  return alphs[rand_idx];
+}
 function process_icon(code) {
   try {
     if(typeof code !== 'number' || isNaN(code)) return false;
@@ -30,6 +35,7 @@ async function process_current_weather(data) {
     } = data?.current;
     const current_forcast = data?.forecast?.forecastday[0];
     const {maxtemp_c,maxtemp_f,mintemp_c,mintemp_f,uv,condition} = current_forcast.day;
+    const processed_icon_req = process_icon(condition.code);
     return {
       temp_f: {
         current:Math.round(temp_f),
@@ -46,7 +52,8 @@ async function process_current_weather(data) {
       uv:uv,is_day:Boolean(is_day),
       condition: {
         title: condition.text,
-        icon: process_icon(condition.code)
+        icon: processed_icon_req,
+        bg: `${processed_icon_req}${rand_lttr()}`
       },
       astro: {
         sunrise: current_forcast?.astro?.sunrise,

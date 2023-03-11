@@ -5,7 +5,6 @@ const request_ip = require("request-ip");
 const cookie = require('cookie-parser');
 
 // CONNECTING TO DB
-require('./database/mongo_conn')();
 require('./database/redis_conn');
 
 // All Routers
