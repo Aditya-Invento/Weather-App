@@ -53,7 +53,12 @@ function App() {
     <div id="app_main">
       {pageLoad ? <>
         <main style={{backgroundImage:`linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%), url('${req_url}/bg_imgs/${bg_img}.png')`}} className="animate__animated animate__zoomIn">
-          {settings.open && <SettingsComp toggle_settings={()=>update_settings('open',!settings.open)} update_settings={update_settings} settings={settings} />}
+          {settings.open && <SettingsComp
+            loading={refreshing}
+            get_weather={query=>get_weather({req_url,setState:setState,refresh:true,setRefreshing,more_query:query})}
+            toggle_settings={()=>update_settings('open',!settings.open)}
+            update_settings={update_settings} settings={settings}
+          />}
           <CurrTempComp
             temp_unit={settings.temp}
             curr_temp={curr_temp}

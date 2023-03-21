@@ -4,7 +4,7 @@ function CurrentMetrics({title,val,unit,other,uv}) {
       <p>{title} {other&&!uv&&<span style={{fontSize:'12px'}}>"{unit}</span>}</p>
       {other?
         <h3>{val}</h3>:
-        <h3>{val}&deg;C</h3>
+        <h3>{val}&deg;{unit.toLocaleUpperCase()}</h3>
       }
     </div>
   )

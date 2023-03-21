@@ -11,7 +11,7 @@ export const WeatherStoreProvider = ({ children }) => {
       dist: 'kph',//mph / kph
       measure: 'inch',//mm / inch
       search_by: 'auto',// auto / city / zip
-      country_code: '',//NA
+      query_param: ''
     },
     bg_img: '',
     curr_temp: {
