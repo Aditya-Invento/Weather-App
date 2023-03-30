@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import def_prop from '../../utils/def_prop';
+// import {def_prop} from '../../utils/cusFuncs';
 // Component
 import CurrMtx from './CurrMtx.vue';
 // Setting Options
@@ -18,14 +18,19 @@ export default {
   // name:'CurrOthMtx',
   components: {CurrMtx},
   props: {
-    curr_other_metrics:def_prop.get(Object,{
-      high: {_f:'--',_c:'--'},low: {_f:'--',_c:'--'},
-      feelslike: {_f:'--',_c:'--'},precip: {mm: '--',inch: '--'},
-      wind: {kph: '--',mph: '--'},uv: '--',is_day: null,
-    }),
-    temp_unit:def_prop.get(String,'c'),
-    dist_unit:def_prop.get(String,'kph'),
-    measure_unit:def_prop.get(String,'inch')
+    curr_other_metrics:Object,
+    temp_unit:String,
+    dist_unit:String,
+    measure_unit:String
+
+    // curr_other_metrics:def_prop(Object,{
+    //   high: {_f:'--',_c:'--'},low: {_f:'--',_c:'--'},
+    //   feelslike: {_f:'--',_c:'--'},precip: {mm: '--',inch: '--'},
+    //   wind: {kph: '--',mph: '--'},uv: '--',is_day: null,
+    // }),
+    // temp_unit:def_prop(String,'c'),
+    // dist_unit:def_prop(String,'kph'),
+    // measure_unit:def_prop(String,'inch')
   },
   data() {
     return {

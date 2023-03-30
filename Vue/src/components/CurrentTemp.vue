@@ -11,15 +11,20 @@
 
 <script>
 // Utils
-import def_prop from '../utils/def_prop';
+// import {def_prop} from '../utils/cusFuncs';
 
 export default {
   props: {
-    toggle_settings: def_prop.get(Function,()=>{}),
-    curr_temp: def_prop.get(Object,{_f:'--',_c:'--'}),
-    title: def_prop.get(String,'--'),
-    location: def_prop.get(String,'--'),
-    temp_unit: def_prop.get(String,'c')
+    toggle_settings: Function,
+    curr_temp: Object,
+    title: String,
+    location: String,
+    temp_unit: String
+    // toggle_settings: def_prop(Function,()=>{}),
+    // curr_temp: def_prop(Object,{_f:'--',_c:'--'}),
+    // title: def_prop(String,'--'),
+    // location: def_prop(String,'--'),
+    // temp_unit: def_prop(String,'c')
   },
   computed: {
     m_title() {return this.title === 'Sunny'? 'Clear Sky' : this.title},

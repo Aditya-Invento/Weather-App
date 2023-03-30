@@ -33,10 +33,8 @@
 <script>
 export default {
   props: {
-    search_by: {
-      type: String,
-      default: 'auto'
-    }
+    search_by: String,
+    update_settings: Function
   },
   data() {
     return {

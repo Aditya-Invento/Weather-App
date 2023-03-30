@@ -12,13 +12,16 @@
 
 <script>
 import DayComp from './Day.vue';
-import def_prop from '../../utils/def_prop';
+// import {def_prop} from '../../utils/cusFuncs';
 export default {
   components: {DayComp},
   props: {
     req_url: String,
-    forcast_day: def_prop.get(Array,new Array(2).fill({date: '--',temp_c: '--',temp_f: '--',icon: 100})),
-    temp_unit: def_prop.get(String,'c')
+    forcast_day: Array,
+    temp_unit: String
+
+    // forcast_day: def_prop(Array,new Array(2).fill({date: '--',temp_c: '--',temp_f: '--',icon: 100})),
+    // temp_unit: def_prop(String,'c')
   }
 }
 </script>

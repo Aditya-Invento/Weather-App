@@ -3,19 +3,21 @@
     <p>{{ time }}</p>
     <div title="Refresh Weather">
       <span><i class="fa-solid fa-rotate-right"></i></span>
-      <span>Refresh</span>
+      <span @click="refresh_api">Refresh</span>
     </div>
   </div>
 </template>
 
 <script>
-import def_prop from '../utils/def_prop';
 import Moment from 'moment';
 
 export default {
   props: {
-    refresh_api: def_prop.get(Function,()=>{}),
-    loading: def_prop.get(Boolean,true)
+    refresh_api: {
+      type: Function,
+      default: ()=> 'refresh clicked'
+    },
+    loading: Boolean
   },
   data() {
     return {

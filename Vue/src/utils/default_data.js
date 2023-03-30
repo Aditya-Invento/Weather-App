@@ -6,7 +6,7 @@ export default {
     temp: 'c',//c / f
     dist: 'kph',//mph / kph
     measure: 'inch',//mm / inch
-    search_by: 'auto',// auto / city / zip
+    search_by: 'city',// auto / city / zip
     query_param: ''
   },
   bg_img: '/ClearSky.png',
@@ -17,13 +17,6 @@ export default {
   },
   title: "--",
   location: '--',
-  // Before
-  curr_temp: {
-    location: '--',
-    _f:'--',
-    _c:'--',
-    title: "--",
-  },
   curr_other_metrics: {
     high: {
       _f:'--',

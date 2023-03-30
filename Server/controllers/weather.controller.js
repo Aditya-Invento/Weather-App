@@ -11,7 +11,7 @@ async function fetch_weather(req,res) {
   try {
     // Getting Cache
     const get_cache_weather = await get_rd_data(rdkey_weather+req?.cookies?.weather_cache);
-    if(get_cache_weather && !req.query.refresh) return res.json(get_cache_weather);
+    if(get_cache_weather && (req.query.refresh === 0 || req.query.refresh === '0')) return res.json(get_cache_weather);
     // Getting Cache
     const {by,val,country_code} = req.query;//val for lat_lon=<lat>,<lon>
     const can_q_by = {ip:1,lat_lon:1,city:1,zip:1};
@@ -58,7 +58,10 @@ async function fetch_weather(req,res) {
       location:display_name,
       current:current_w,
       daily:daily_w,
-      alerts:res_weather?.data?.alerts?.alert
+      alerts:res_weather?.data?.alerts?.alert,
+      settings:{
+        search_by: by === 'lat_lon' || by === 'ip' ? 'auto' : by
+      }
     }
     // Setting Cache
     const cache_id = shortid.generate();

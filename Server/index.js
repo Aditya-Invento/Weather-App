@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const request_ip = require("request-ip");
 const cookie = require('cookie-parser');
+const cors = require('cors');
 
 // CONNECTING TO DB
 require('./database/redis_conn');
@@ -12,6 +13,11 @@ const weather_router = require('./router/weather.router');
 // All Routers
 
 // All middlewares
+// app.use(cors());
+// app.use(cors({
+//   origin: 'http://localhost:5173',
+//   credentials: true
+// }));
 app.use(cookie('super_secret',{
   // maxAge: 604800,//1 week
   // expire: 604800,//1 week

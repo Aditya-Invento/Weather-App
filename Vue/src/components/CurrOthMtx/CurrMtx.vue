@@ -7,21 +7,20 @@
 </template>
 
 <script>
-import def_prop from '../../utils/def_prop';
+// import {def_prop} from '../../utils/cusFuncs';
 export default {
   props: {
-    title: def_prop.get(String,'--'),
-    val: def_prop.get(String,''),
-    unit: def_prop.get(String,'c'),
-    other: def_prop.get(Boolean,false),
-    uv: def_prop.get(Boolean,false)
-  },
-  created() {
-    // console.log('title ',this.title);
-    // console.log('val ',this.val);
-    // console.log('unit ',this.unit);
-    // console.log('other ',this.other);
-    // console.log('uv ',this.uv);
+    title: String,
+    val: String,
+    unit: String,
+    other: Boolean,
+    uv: Boolean
+
+    // title: def_prop(String,'--'),
+    // val: def_prop(String,''),
+    // unit: def_prop(String,'c'),
+    // other: def_prop(Boolean,false),
+    // uv: def_prop(Boolean,false)
   },
   computed: {
     m_unit() {
