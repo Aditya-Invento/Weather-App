@@ -34,7 +34,9 @@
 export default {
   props: {
     search_by: String,
-    update_settings: Function
+    update_settings: Function,
+    req_api: Function,
+    refresh: Boolean
   },
   data() {
     return {
@@ -45,6 +47,11 @@ export default {
   watch: {
     search_inp(data) {
       console.log(data);
+    }
+  },
+  methods: {
+    refresh_weather() {
+
     }
   }
 }

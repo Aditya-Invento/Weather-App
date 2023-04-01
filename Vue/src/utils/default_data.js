@@ -1,12 +1,13 @@
 export default {
-  loading: false,
+  loading: true,
+  refresh: false,
   req_url: 'http://localhost:5000',
   settings: {
     open: false,
     temp: 'c',//c / f
     dist: 'kph',//mph / kph
     measure: 'inch',//mm / inch
-    search_by: 'city',// auto / city / zip
+    search_by: 'auto',// auto / city / zip
     query_param: ''
   },
   bg_img: '/ClearSky.png',
@@ -45,7 +46,10 @@ export default {
     date: '--',
     temp_c: '--',
     temp_f: '--',
-    icon: 100
+    condition: {
+      icon: '--',
+      title: '--'
+    }
   }),
   alerts: [],
 }

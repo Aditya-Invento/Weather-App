@@ -2,8 +2,8 @@
   <div class="time_reload animate__animated animate__fadeInUp animate__delay-1s">
     <p>{{ time }}</p>
     <div title="Refresh Weather">
-      <span><i class="fa-solid fa-rotate-right"></i></span>
-      <span @click="refresh_api">Refresh</span>
+      <span :style="refresh ? {display:'none'} : {}"><i class="fa-solid fa-rotate-right"></i></span>
+      <span @click="refresh_api('?by=auto')">{{ refresh ? 'Loading...' : 'Refresh' }}</span>
     </div>
   </div>
 </template>
@@ -13,11 +13,9 @@ import Moment from 'moment';
 
 export default {
   props: {
-    refresh_api: {
-      type: Function,
-      default: ()=> 'refresh clicked'
-    },
-    loading: Boolean
+    refresh_api: Function,
+    loading: Boolean,
+    refresh: Boolean
   },
   data() {
     return {

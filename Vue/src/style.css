@@ -19,6 +19,7 @@
 }
 .rotate_smooth {
   transition: all 0.5s;
+  cursor: pointer;
 }
 .rotate_smooth:hover {
   transform: rotate(180deg);
@@ -267,7 +268,6 @@ main {
   margin-top: 52px;
   font-size: 38px;
   padding-right: 30px;
-  cursor: pointer;
 }
 .settings > .search {
   margin: 26px 30px 20px 30px;

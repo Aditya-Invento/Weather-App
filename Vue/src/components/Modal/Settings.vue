@@ -5,7 +5,12 @@
       <i class="fa-solid fa-xmark rotate_smooth"></i>
     </span>
     <!-- Search -->
-    <Search :update_settings="update_settings" :search_by="settings.search_by" />
+    <Search
+      :req_api="req_api"
+      :refresh="refresh"
+      :update_settings="update_settings"
+      :search_by="settings.search_by"
+    />
     <!-- Unit Ctrls -->
     <div class="mtrix_controlers animate__animated animate__fadeInUp animate__delay-1s">
       <UnitCtrl
@@ -27,7 +32,9 @@ export default {
   props: {
     settings: Object,
     toggle_settings: Function,
-    update_settings: Function
+    update_settings: Function,
+    req_api: Function,
+    refresh: Boolean
   },
   data() {
     return {
