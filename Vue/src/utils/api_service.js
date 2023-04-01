@@ -21,7 +21,7 @@ export default async ({
     const position = await get_location();
     if(position?.coords?.latitude && position?.coords?.longitude) req_query = `?by=lat_lon&val=${position.coords.latitude},${position.coords.longitude}`;
     // If Custom Query
-    if(cus_query && cus_query !== '?by=auto') req_query = cus_query;
+    if(cus_query && (cus_query !== '?by=auto')) req_query = cus_query;
     // Requesting Api
     const res_weather = await axios.get(req_url+'/weather'+req_query,{withCredentials: true});
     const {alerts,current,daily,location,_ip} = res_weather.data;
@@ -45,6 +45,8 @@ export default async ({
     if(cus_query) toggle_load(true);
     else toggle_load();
   } catch(err) {
+    if(cus_query) toggle_load(true);
+    else toggle_load();
     console.log(err?.response?.data?.msg || err?.message || 'Something Went Wrong.');
   }
 }

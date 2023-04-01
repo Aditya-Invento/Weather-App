@@ -25,15 +25,21 @@ export default {
     }
   },
   mounted() {
+    // Current Time
     this.timeout = setTimeout(()=>
       this.timer = setInterval(()=>
         this.time = Moment().format('hh:mm A')
       ,1000)
     ,1000);
+    // Refresh API
+    this.refresh_timer = setInterval(()=>this.refresh_api('?by=auto'),300000);
   },
   beforeUnmount() {
+    // Current Time
     clearInterval(this.timer);
     clearTimeout(this.timeout);
+    // Refresh API
+    clearInterval(this.refresh_timer);
   }
 }
 </script>

@@ -106,11 +106,6 @@ export default {
   },
   created() {
     if(this.main_data.loading) this.req_api();
-  },
-  watch: {
-    'main_data.refresh'(pre) {
-      console.log('Refresh: ',pre);
-    }
   }
 };
 </script>
