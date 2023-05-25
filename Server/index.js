@@ -14,10 +14,10 @@ const weather_router = require('./router/weather.router');
 
 // All middlewares
 // app.use(cors());
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-}));
+// app.use(cors({
+//   origin: 'http://localhost:5173',
+//   credentials: true
+// }));
 app.use(cookie('super_secret',{
   // maxAge: 604800,//1 week
   // expire: 604800,//1 week
