@@ -4,7 +4,7 @@ const app = express();
 const request_ip = require("request-ip");
 const cookie = require('cookie-parser');
 const cors = require('cors');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 // CONNECTING TO DB
 require('./database/redis_conn');
