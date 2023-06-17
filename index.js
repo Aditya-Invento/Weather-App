@@ -4,6 +4,7 @@ const app = express();
 const request_ip = require("request-ip");
 const cookie = require('cookie-parser');
 const cors = require('cors');
+const port = process.env.PORT || 5000;
 
 // CONNECTING TO DB
 require('./database/redis_conn');
@@ -44,7 +45,7 @@ app.get('*',(req,res)=>{
   });
 });
 
-app.listen(5000,err=>{
+app.listen(port,err=>{
   if(err) throw err;
-  console.log('=> SERVER STARTED @- 🌎:5000')
+  console.log(`=> SERVER STARTED @- 🌎:${port}`)
 });
