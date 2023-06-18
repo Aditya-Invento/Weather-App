@@ -44,7 +44,7 @@ app.get('*',(req,res)=>{
   });
 });
 
-app.listen(5000,err=>{
+app.listen(process.env.PORT || 3000,err=>{
   if(err) throw err;
-  console.log('=> SERVER STARTED @- 🌎:5000')
+  console.log(`=> SERVER STARTED @- 🌎:${process.env.PORT || 3000}`)
 });
