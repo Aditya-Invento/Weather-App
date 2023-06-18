@@ -1,5 +1,5 @@
 {
-   "version": 3,
+   "version": 2,
    "name": "my-weather-mern-mevn",
    "builds": [
       { "src": "index.js", "use": "@vercel/node" }
