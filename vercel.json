@@ -1,3 +1,16 @@
 {
-  "version": 2
+  "version": 2,
+  "builds": [
+    { "src": "public/**", "use": "@vercel/static" },
+    { "src": "db/**", "use": "@vercel/static" },
+    { "src": "controllers/**", "use": "@vercel/node" },
+    { "src": "router/**", "use": "@vercel/node" },
+    { "src": "utils/**", "use": "@vercel/node" },
+    { "src": "*.js", "use": "@vercel/node" },
+    { "src": "*.json", "use": "@vercel/node" },
+    { "src": "*.svg", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.js" }
+  ]
 }
