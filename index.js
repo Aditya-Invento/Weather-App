@@ -34,7 +34,7 @@ app.use(express.json());
 
 app.use('/weather',weather_router);
 app.get('/',(req,res)=>{
-  res.sendFile('index.html');
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 app.get('*',(req,res)=>{
   res.status(503).json({
