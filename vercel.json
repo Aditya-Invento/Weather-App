@@ -2,10 +2,7 @@
   "version": 2,
   "builds": [
     { "src": "public/**", "use": "@vercel/static" },
-    { "src": "database/**", "use": "@vercel/static" },
-    { "src": "controllers/**", "use": "@vercel/node" },
-    { "src": "router/**", "use": "@vercel/node" },
-    { "src": "utils/**", "use": "@vercel/node" },
+    { "src": "{controllers,database,router,utils}/**", "use": "@vercel/node" },
     { "src": "*.js", "use": "@vercel/node" },
     { "src": "*.json", "use": "@vercel/node" },
     { "src": "*.svg", "use": "@vercel/static" }
