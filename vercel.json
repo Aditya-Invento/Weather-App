@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     { "src": "public/**", "use": "@vercel/static" },
-    { "src": "db/**", "use": "@vercel/static" },
+    { "src": "database/**", "use": "@vercel/static" },
     { "src": "controllers/**", "use": "@vercel/node" },
     { "src": "router/**", "use": "@vercel/node" },
     { "src": "utils/**", "use": "@vercel/node" },
