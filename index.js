@@ -13,18 +13,11 @@ const weather_router = require('./router/weather.router');
 // All Routers
 
 // All middlewares
-// app.use(cors());
-// app.use(cors({
-//   origin: 'http://localhost:5173',
-//   credentials: true
-// }));
-app.use(cookie('super_secret',{
-  // maxAge: 604800,//1 week
-  // expire: 604800,//1 week
+app.use(cookie('super_secret', {
   name: 'weather_cache',
-  httpOnly: false,//Change This Later
-  sameSite: false,//Change This later
-  secure: false,//process.env.NODE_ENV === 'production'
+  httpOnly: false,
+  sameSite: false,
+  secure: false,
   path: '/'
 }));
 app.use(request_ip.mw());
@@ -32,19 +25,23 @@ app.use(express.static("public"));
 app.use(express.json());
 // All middlewares
 
-app.use('/weather',weather_router);
-// app.get('/',(req,res)=>{
-  
-// });
-app.get('*',(req,res)=>{
+app.use('/weather', weather_router);
+
+// Catch-all route for all other requests
+app.get('*', (req, res, next) => {
+  // Exclude requests for static files
+  if (req.url.startsWith('/public/')) {
+    return next();
+  }
+
   res.status(503).json({
-    site:'Weather App',
-    msg:'Site Under Construction 🚧',
-    err:503
+    site: 'Weather App',
+    msg: 'Site Under Construction 🚧',
+    err: 503
   });
 });
 
-app.listen(process.env.PORT || 3000,err=>{
-  if(err) throw err;
-  console.log(`=> SERVER STARTED @- 🌎:${process.env.PORT || 3000}`)
+app.listen(process.env.PORT || 3000, err => {
+  if (err) throw err;
+  console.log(`=> SERVER STARTED @- 🌎:${process.env.PORT || 3000}`);
 });
