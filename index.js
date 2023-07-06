@@ -33,9 +33,6 @@ app.use(express.json());
 // All middlewares
 
 app.use('/weather',weather_router);
-// app.get('/',(req,res)=>{
-  
-// });
 app.get('*',(req,res)=>{
   res.status(503).json({
     site:'Weather App',

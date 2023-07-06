@@ -1,0 +1,8 @@
+{
+  "apps" : [{
+    "script"    : "index.js",
+    "instances" : "max-1",
+    "exec_mode" : "cluster",
+    "max_memory_restart" : "1G"
+  }]
+}
